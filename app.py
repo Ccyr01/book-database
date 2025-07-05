@@ -100,7 +100,9 @@ def app():
             print('Book Added Successfully')
             time.sleep(1.5)
         elif choice == '2':
-            pass
+            for book in session.query(Book):
+                print(f'{book.id} | {book.title} | {book.author} | {book.price}')
+            input('\nPress enter to return to the main menu.')
         elif choice == '3':
             pass
         elif choice == '4':
