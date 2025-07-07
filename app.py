@@ -184,7 +184,28 @@ def app():
                 print('Book deleted!')
                 time.sleep(1.5)
         elif choice == '4':
-            pass
+            print('\n📚 BOOK ANALYSIS 📚\n' + '-'*40)
+
+            oldest_book = session.query(Book).order_by(Book.published_date).first()
+            newest_book = session.query(Book).order_by(Book.published_date.desc()).first()
+            total_books = session.query(Book).count()
+            python_books = session.query(Book).filter(Book.title.like("%Python%")).count()
+
+            print(f"Total Books in Database: {total_books}")
+            print(f"Books with 'Python' in Title: {python_books}\n")
+
+            print(f"📖 Oldest Book:")
+            print(f"   Title : {oldest_book.title}")
+            print(f"   Author: {oldest_book.author}")
+            print(f"   Date  : {oldest_book.published_date.strftime('%B %d, %Y')}\n")
+
+            print(f"📖 Newest Book:")
+            print(f"   Title : {newest_book.title}")
+            print(f"   Author: {newest_book.author}")
+            print(f"   Date  : {newest_book.published_date.strftime('%B %d, %Y')}\n")
+
+            input('Press Enter to return to the main menu.')
+
         elif choice == '5':
             print('Good-bye')
             app_running = False
